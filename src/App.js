@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Contact from './Contact';
 import ContactList from './ContactList';
 
 class App extends Component {
   constructor(props) {
     super(props)
+
+    // Define initial state
     this.state = {
       contactList: [],
       firstName: "",
       lastName: "",
       emailAddress: "",
-      phoneNumber: ""
+      phoneNumber: "",
+      remoteURL: "http://localhost:5000/contacts",
+      contactLoadingMsg: "Loading contacts..."
     }
+
+    // Bind event handler context to this component
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleFormFieldChange = this.handleFormFieldChange.bind(this)
+  }
+
+  loadContacts () {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', this.state.remoteURL, true)
+
+    xhr.onload = function() {
+        let data = JSON.parse(xhr.responseText)
+
+        // Simulating a slow HTTP connection
+        setTimeout(() => {
+            this.setState({
+                contactList: data,
+                contactLoadingMsg: ""
+            })
+        }, 3000)
+    }.bind(this)
+
+    xhr.send()
+  }
+
+  componentDidMount () {
+      this.loadContacts()
   }
 
   handleSubmit = function (evt) {
@@ -29,11 +57,15 @@ class App extends Component {
     }
 
     this.setState(prevState => ({
-      contactList: prevState.contactList.concat(newContactInfo)
+      contactList: prevState.contactList.concat(newContactInfo),
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      emailAddress: ""
     }))
   }
 
-  handleChange (evt) {
+  handleFormFieldChange (evt) {
     const stateToChange = {}
     stateToChange[evt.target.id] = evt.target.value
 
@@ -53,28 +85,28 @@ class App extends Component {
         <form onSubmit={this.handleSubmit}>
           <input type="text"
                  value={this.state.firstName}
-                 onChange={this.handleChange}
+                 onChange={this.handleFormFieldChange}
                  placeholder="Enter your first name" id="firstName" />
 
           <input type="text"
                  value={this.state.lastName}
-                 onChange={this.handleChange}
+                 onChange={this.handleFormFieldChange}
                  placeholder="Enter your last name" id="lastName" />
 
           <input type="text"
                  value={this.state.phoneNumber}
-                 onChange={this.handleChange}
+                 onChange={this.handleFormFieldChange}
                  placeholder="Enter your phoneNumber" id="phoneNumber" />
 
           <input type="text"
                  value={this.state.emailAddress}
-                 onChange={this.handleChange}
+                 onChange={this.handleFormFieldChange}
                  placeholder="Enter your email address" id="emailAddress" />
 
 
           <button>Add Contact</button>
         </form>
-        <ContactList contactList={this.state.contactList} />
+        <ContactList contactList={this.state.contactList} loadingMsg={this.state.contactLoadingMsg} />
       </div>
     );
   }

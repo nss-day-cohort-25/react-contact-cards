@@ -1,0 +1,29 @@
+{
+
+	"contacts":[
+		{
+			"firstName": "Steve",
+			"lastName": "Brownlee",
+			"emailAddress": "steve@stevebrownlee.com",
+			"phoneNumber": "555-1212"
+		},
+		{
+			"firstName": "Jisie",
+			"lastName": "David",
+			"emailAddress": "jisie@david.com",
+			"phoneNumber": "555-1212"
+		},
+		{
+			"firstName": "Joe",
+			"lastName": "Shepherd",
+			"emailAddress": "joe@shepherd.com",
+			"phoneNumber": "555-1212"
+		},
+		{
+			"firstName": "Kimmy",
+			"lastName": "Bird",
+			"emailAddress": "kimmy@bird.com",
+			"phoneNumber": "555-1212"
+		}
+	]
+}

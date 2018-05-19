@@ -7,7 +7,7 @@ import "../NavBar.css"
 class NavBar extends Component {
     render() {
         return (
-            <nav class="nav nav-pills nav-justified">
+            <nav className="nav nav-pills nav-justified">
                 <Link className="nav-link" to="/new">New Contact</Link>
                 <Link className="nav-link" to="/">List Contacts</Link>
             </nav>

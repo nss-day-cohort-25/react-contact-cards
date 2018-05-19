@@ -1,0 +1,11 @@
+.contactlist > article:first-of-type {
+    margin-block-start: 5vmax;
+}
+
+.contactlist > article {
+    margin-block-start: 1vmax;
+}
+
+.contactlist > article:nth-child(2n) {
+    background-color: aliceblue;
+}

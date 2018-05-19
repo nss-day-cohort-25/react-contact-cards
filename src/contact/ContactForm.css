@@ -1,0 +1,8 @@
+.form-control {
+    margin-block-end: 2vmax;
+    margin-block-start: 1vmax;
+}
+
+.contactform input:first-of-type {
+    margin-block-start: 3vmax;
+}

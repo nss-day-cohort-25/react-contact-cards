@@ -5,6 +5,7 @@ class BootstrapInput extends Component {
     render() {
         return (
             <input type="text"
+                id={this.props.id}
                 value={this.props.val}
                 onChange={this.props.handler}
                 className="form-control"
